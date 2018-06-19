@@ -151,16 +151,18 @@ int generateCubeOrder(map<int,string> &lookup, OMXMatrix* omx, int tables, const
     boolean quit = false;
 
     for (int i=0; i<tables;i++) {
-        string tablename(tnames[i]);
+        string tablename(omx->getTableName(i+1).c_str());
         int cubenum = omx->getCubeNumber(tablename);
 
+		//fprintf(stderr, "\n>>> Table %s has CUBE_MAT_NUMBER attribute: %d", omx->getTableName(i+1).c_str(), cubenum);
+
         if (cubenum<1) {
-            fprintf(stderr, "\n** Table %s does not have required CUBE_MAT_NUMBER attribute",tnames[i]);
+            fprintf(stderr, "\n** Table %s does not have required CUBE_MAT_NUMBER attribute", omx->getTableName(i+1).c_str());
             quit = true;
             continue;
         }
         if (lookup.count(cubenum)>0) {
-            fprintf(stderr, "\n** Table %s has duplicate CUBE_MAT_NUMBER attribute: %s (%d)",tnames[i],lookup[cubenum].c_str(), cubenum);
+            fprintf(stderr, "\n** Table %s has duplicate CUBE_MAT_NUMBER attribute: %s (%d)", omx->getTableName(i+1).c_str(),lookup[cubenum].c_str(), cubenum);
             quit = true;
             continue;
         }

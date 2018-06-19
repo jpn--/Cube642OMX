@@ -4,6 +4,9 @@
  *
  * @author Billy Charlton, PSRC
  */
+
+#define H5_BUILT_AS_DYNAMIC_LIB 1
+
 #include <iostream>
 #include <string>
 #include <vector>
